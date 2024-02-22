@@ -1,6 +1,10 @@
 <template lang="">
     <div>
-       <h1>Main</h1> 
+       <ul>
+        <li v-for="project in projects" :key='project.id'>
+            {{project.title}}
+        </li>
+       </ul>
     </div>
 </template>
 <script>
@@ -8,7 +12,11 @@ import axios from 'axios';
 export default {
     name: 'AppMain',
     data() {
+        return{
+            projects:[
 
+            ],
+        }
     },
     methods: {
         getProjects() {
@@ -16,8 +24,9 @@ export default {
                 params: {
                 }
             })
-                .then(function (response) {
-                    console.log(response);
+                .then( (response) => {
+                    console.log(response.data.data);
+                    this.projects=response.data.data;
                 })
                 .catch(function (error) {
                     console.log(error);
